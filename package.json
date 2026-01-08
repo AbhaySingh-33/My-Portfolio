@@ -9,15 +9,20 @@
     "lint": "eslint"
   },
   "dependencies": {
+    "@radix-ui/react-scroll-area": "^1.2.10",
+    "framer-motion": "^12.24.12",
+    "lucide-react": "^0.562.0",
     "next": "16.1.1",
     "react": "19.2.3",
-    "react-dom": "19.2.3"
+    "react-dom": "19.2.3",
+    "smoothscroll-polyfill": "^0.4.4"
   },
   "devDependencies": {
     "@tailwindcss/postcss": "^4",
-    "@types/node": "^20",
+    "@types/node": "^20.19.27",
     "@types/react": "^19",
     "@types/react-dom": "^19",
+    "@types/smoothscroll-polyfill": "^0.3.4",
     "eslint": "^9",
     "eslint-config-next": "16.1.1",
     "tailwindcss": "^4",
