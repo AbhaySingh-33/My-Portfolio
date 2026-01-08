@@ -1,106 +1,191 @@
 "use client";
 
 import { motion } from "framer-motion";
-import { ArrowDown, Github, Linkedin, Mail } from "lucide-react";
+import { ArrowDown, Github, Linkedin, Mail, Award, Code2, Sparkles } from "lucide-react";
 import { fadeIn, staggerContainer, textVariant } from "@/lib/animations";
+import TypewriterText from "@/components/ui/TypewriterText";
+import Image from "next/image";
 
 export default function Hero() {
   return (
     <section
       id="hero"
-      className="relative flex min-h-screen items-center justify-center overflow-hidden bg-gradient-to-b from-background to-muted/20 px-4 sm:px-6 lg:px-8"
+      className="relative flex min-h-screen items-center justify-center overflow-hidden bg-linear-to-b from-background to-muted/20 px-4 pt-16 sm:px-6 lg:px-8"
     >
       <motion.div
         variants={staggerContainer(0.2, 0.1)}
         initial="hidden"
         animate="show"
-        className="relative z-10 mx-auto max-w-4xl text-center"
+        className="relative z-10 mx-auto grid max-w-7xl gap-12 lg:grid-cols-2 lg:gap-16"
       >
-        {/* Greeting */}
-        <motion.p
-          variants={fadeIn("down", 0)}
-          className="mb-4 text-lg font-medium text-accent sm:text-xl"
-        >
-          Hi, I'm
-        </motion.p>
-
-        {/* Name */}
-        <motion.h1
-          variants={textVariant(0.1)}
-          className="mb-6 text-5xl font-bold leading-tight tracking-tight sm:text-6xl lg:text-7xl"
-        >
-          <span className="text-gradient">Your Name</span>
-        </motion.h1>
-
-        {/* Title */}
-        <motion.h2
-          variants={textVariant(0.2)}
-          className="mb-8 text-2xl font-semibold text-muted-foreground sm:text-3xl lg:text-4xl"
-        >
-          Full Stack Developer & Creative Designer
-        </motion.h2>
-
-        {/* Description */}
-        <motion.p
-          variants={fadeIn("up", 0.3)}
-          className="mx-auto mb-12 max-w-2xl text-base leading-relaxed text-muted-foreground sm:text-lg"
-        >
-          I craft beautiful, functional web experiences with modern technologies.
-          Passionate about clean code, user experience, and bringing ideas to
-          life.
-        </motion.p>
-
-        {/* CTA Buttons */}
-        <motion.div
-          variants={fadeIn("up", 0.4)}
-          className="flex flex-col items-center justify-center gap-4 sm:flex-row"
-        >
-          <a
-            href="#projects"
-            className="group flex items-center gap-2 rounded-full bg-primary px-8 py-3 font-medium text-primary-foreground transition-all hover:scale-105 hover:bg-accent hover:shadow-lg hover:shadow-accent/50"
+        {/* Left: Text Content */}
+        <div className="flex flex-col justify-center space-y-8">
+          {/* Greeting */}
+          <motion.p
+            variants={fadeIn("down", 0)}
+            className="text-lg font-medium text-accent sm:text-xl"
           >
-            View My Work
-            <ArrowDown className="h-4 w-4 transition-transform group-hover:translate-y-1" />
-          </a>
-          <a
-            href="#contact"
-            className="flex items-center gap-2 rounded-full border-2 border-primary px-8 py-3 font-medium text-primary transition-all hover:scale-105 hover:border-accent hover:bg-accent/10 hover:text-accent"
-          >
-            Get In Touch
-          </a>
-        </motion.div>
+            Hi, I'm
+          </motion.p>
 
-        {/* Social Links */}
-        <motion.div
-          variants={fadeIn("up", 0.5)}
-          className="mt-12 flex items-center justify-center gap-6"
-        >
-          <a
-            href="https://github.com"
-            target="_blank"
-            rel="noopener noreferrer"
-            className="text-muted-foreground transition-all hover:scale-110 hover:text-primary"
-            aria-label="GitHub"
+          {/* Name with Typewriter Effect */}
+          <motion.h1
+            variants={textVariant(0.1)}
+            className="text-5xl font-bold leading-tight tracking-tight sm:text-6xl lg:text-7xl"
           >
-            <Github className="h-6 w-6" />
-          </a>
-          <a
-            href="https://linkedin.com"
-            target="_blank"
-            rel="noopener noreferrer"
-            className="text-muted-foreground transition-all hover:scale-110 hover:text-primary"
-            aria-label="LinkedIn"
+            <TypewriterText
+              text="Abhay Kumar Singh"
+              delay={300}
+              speed={100}
+              className="text-gradient"
+            />
+          </motion.h1>
+
+          {/* Tagline */}
+          <motion.h2
+            variants={textVariant(0.2)}
+            className="text-2xl font-semibold text-muted-foreground sm:text-3xl lg:text-4xl"
           >
-            <Linkedin className="h-6 w-6" />
-          </a>
-          <a
-            href="mailto:your.email@example.com"
-            className="text-muted-foreground transition-all hover:scale-110 hover:text-primary"
-            aria-label="Email"
+            Full-stack Developer | Vadodara, Gujarat
+          </motion.h2>
+
+          <motion.p
+            variants={fadeIn("up", 0.3)}
+            className="max-w-2xl text-base leading-relaxed text-muted-foreground sm:text-lg"
           >
-            <Mail className="h-6 w-6" />
-          </a>
-        </motion.div>
+            BTech CSE Student specializing in full-stack development with MERN, Next.js, and microservices.
+            Building scalable applications with real-time features and AI integration.
+          </motion.p>
+
+          {/* CTA Buttons */}
+          <motion.div
+            variants={fadeIn("up", 0.4)}
+            className="flex flex-col items-start gap-4 sm:flex-row"
+          >
+            <a
+              href="#projects"
+              className="group relative flex items-center gap-2 overflow-hidden rounded-full bg-primary px-8 py-3 font-medium text-primary-foreground transition-all hover:scale-105 hover:shadow-xl hover:shadow-primary/50"
+            >
+              <span className="relative z-10">View Projects</span>
+              <ArrowDown className="relative z-10 h-4 w-4 transition-transform group-hover:translate-y-1" />
+              <motion.div
+                className="absolute inset-0 bg-accent"
+                initial={{ x: "-100%" }}
+                whileHover={{ x: 0 }}
+                transition={{ duration: 0.3 }}
+              />
+            </a>
+            <a
+              href="#contact"
+              className="flex items-center gap-2 rounded-full border-2 border-primary px-8 py-3 font-medium text-primary transition-all hover:scale-105 hover:border-accent hover:bg-accent/10 hover:text-accent hover:shadow-lg hover:shadow-accent/30"
+            >
+              Contact Me
+            </a>
+          </motion.div>
+
+          {/* Social Links */}
+          <motion.div
+            variants={fadeIn("up", 0.5)}
+            className="flex items-center gap-6"
+          >
+            <a
+              href="https://github.com/AbhaySingh-33"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="text-muted-foreground transition-all hover:scale-110 hover:text-primary"
+              aria-label="GitHub"
+            >
+              <Github className="h-6 w-6" />
+            </a>
+            <a
+              href="https://www.linkedin.com/in/abhay-singh-77b81833b"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="text-muted-foreground transition-all hover:scale-110 hover:text-primary"
+              aria-label="LinkedIn"
+            >
+              <Linkedin className="h-6 w-6" />
+            </a>
+            <a
+              href="mailto:abhaysingh957152@gmail.com"
+              className="text-muted-foreground transition-all hover:scale-110 hover:text-primary"
+              aria-label="Email"
+            >
+              <Mail className="h-6 w-6" />
+            </a>
+          </motion.div>
+        </div>
+
+        {/* Right: Profile Picture & Stats */}
+        <div className="flex flex-col items-center justify-center space-y-8">
+          {/* Floating Profile Picture */}
+          <motion.div
+            initial={{ opacity: 0, scale: 0.5 }}
+            animate={{ opacity: 1, scale: 1 }}
+            transition={{ duration: 0.5 }}
+            className="relative"
+          >
+            <motion.div
+              animate={{
+                y: [0, -20, 0],
+                rotate: [0, 5, -5, 0],
+              }}
+              transition={{
+                duration: 6,
+                repeat: Infinity,
+                ease: "easeInOut",
+              }}
+              className="relative h-64 w-64 rounded-full bg-gradient-to-br from-primary/30 via-accent/30 to-primary/30 p-2"
+            >
+              <div className="relative h-full w-full overflow-hidden rounded-full bg-background">
+                <Image
+                  src="/profile.jpg"
+                  alt="Abhay Kumar Singh"
+                  width={256}
+                  height={256}
+                  className="h-full w-full rounded-full object-cover"
+                  priority
+                />
+              </div>
+            </motion.div>
+            
+            {/* Glow Effect */}
+            <div className="absolute inset-0 -z-10 rounded-full bg-primary/20 blur-3xl" />
+          </motion.div>
+
+          {/* Animated Stats */}
+          <motion.div
+            variants={staggerContainer(0.1, 0.6)}
+            initial="hidden"
+            animate="show"
+            className="grid w-full max-w-md grid-cols-3 gap-4"
+          >
+            <motion.div
+              variants={fadeIn("up", 0)}
+              className="rounded-2xl border border-border bg-muted/30 p-4 text-center backdrop-blur-sm"
+            >
+              <Code2 className="mx-auto mb-2 h-8 w-8 text-primary" />
+              <p className="text-2xl font-bold text-foreground">3</p>
+              <p className="text-sm text-muted-foreground">Projects</p>
+            </motion.div>
+            <motion.div
+              variants={fadeIn("up", 0.1)}
+              className="rounded-2xl border border-border bg-muted/30 p-4 text-center backdrop-blur-sm"
+            >
+              <Github className="mx-auto mb-2 h-8 w-8 text-primary" />
+              <p className="text-2xl font-bold text-foreground">15+</p>
+              <p className="text-sm text-muted-foreground">GitHub Stars</p>
+            </motion.div>
+            <motion.div
+              variants={fadeIn("up", 0.2)}
+              className="rounded-2xl border border-border bg-muted/30 p-4 text-center backdrop-blur-sm"
+            >
+              <Award className="mx-auto mb-2 h-8 w-8 text-primary" />
+              <p className="text-2xl font-bold text-foreground">3</p>
+              <p className="text-sm text-muted-foreground">Certifications</p>
+            </motion.div>
+          </motion.div>
+        </div>
       </motion.div>
 
       {/* Scroll Indicator */}
@@ -118,7 +203,7 @@ export default function Hero() {
         <ArrowDown className="h-6 w-6 text-muted-foreground" />
       </motion.div>
 
-      {/* Background Decoration */}
+      {/* Parallax Background Decoration */}
       <div className="absolute inset-0 -z-10 overflow-hidden">
         <div className="absolute left-1/2 top-0 h-96 w-96 -translate-x-1/2 rounded-full bg-primary/10 blur-3xl" />
         <div className="absolute bottom-0 right-0 h-96 w-96 rounded-full bg-accent/10 blur-3xl" />

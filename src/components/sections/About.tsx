@@ -1,29 +1,84 @@
 "use client";
 
 import { motion } from "framer-motion";
-import { Code2, Palette, Rocket, Zap } from "lucide-react";
+import { Code2, Palette, Rocket, Zap, GraduationCap, Briefcase, Award } from "lucide-react";
 import { fadeIn, scrollAnimationConfig } from "@/lib/animations";
+import SkillsMarquee from "@/components/ui/SkillsMarquee";
 
 const skills = [
   {
     icon: Code2,
     title: "Frontend Development",
-    description: "React, Next.js, TypeScript, Tailwind CSS",
+    description: "React, Next.js, TypeScript, WebRTC, Tailwind CSS",
   },
   {
     icon: Zap,
-    title: "Backend Development",
-    description: "Node.js, Express, PostgreSQL, MongoDB",
+    title: "Backend & APIs",
+    description: "Node.js, Express.js, REST APIs, Socket.io, Apache Kafka",
   },
   {
     icon: Palette,
-    title: "UI/UX Design",
-    description: "Figma, Adobe XD, Responsive Design",
+    title: "Database & Caching",
+    description: "MongoDB, PostgreSQL, MySQL, Redis, Appwrite",
   },
   {
     icon: Rocket,
-    title: "Performance",
-    description: "Optimization, SEO, Web Vitals",
+    title: "Cloud & DevOps",
+    description: "AWS Foundations, Docker, Kubernetes, Git, Linux",
+  },
+];
+
+const marqueeSkills = [
+  "Next.js",
+  "React",
+  "TypeScript",
+  "Node.js",
+  "Express.js",
+  "Socket.io",
+  "PostgreSQL",
+  "MongoDB",
+  "Redis",
+  "Docker",
+  "Kubernetes",
+  "AWS",
+  "OpenAI API",
+  "WebRTC",
+  "Apache Kafka",
+  "Tailwind CSS",
+];
+
+const timeline = [
+  {
+    type: "education",
+    icon: GraduationCap,
+    title: "BTech - Computer Science & Engineering",
+    organization: "Parul Institute of Technology, Parul University",
+    period: "Aug 2023 - May 2027",
+    description: "CGPA: 8.77/10 | Vadodara, Gujarat",
+  },
+  {
+    type: "cert",
+    icon: Award,
+    title: "AWS Academy Graduate - Cloud Foundations",
+    organization: "Amazon Web Services",
+    period: "Aug 2025",
+    description: "20 hrs course covering AWS core services and cloud computing fundamentals",
+  },
+  {
+    type: "cert",
+    icon: Award,
+    title: "Computer Networks & Internet Protocol",
+    organization: "NPTEL - Elite + Silver (79%)",
+    period: "2024",
+    description: "Advanced certification in networking protocols and computer networks",
+  },
+  {
+    type: "cert",
+    icon: Briefcase,
+    title: "Artificial Intelligence Fundamentals",
+    organization: "IBM SkillsBuild",
+    period: "2024",
+    description: "AI concepts including NLP, Computer Vision, ML, and Deep Learning",
   },
 ];
 
@@ -44,8 +99,7 @@ export default function About() {
         >
           <h2 className="mb-4 text-gradient">About Me</h2>
           <p className="mx-auto max-w-2xl">
-            Passionate developer with a love for creating seamless digital
-            experiences
+            BTech CSE Student at Parul University, building production-ready full-stack applications
           </p>
         </motion.div>
 
@@ -59,19 +113,25 @@ export default function About() {
             variants={fadeIn("right", 0.1)}
             className="space-y-6"
           >
-            <h3 className="text-2xl font-bold">Who I Am</h3>
+            <h3 className="text-2xl font-bold">My Journey</h3>
             <p className="leading-relaxed">
-              I'm a full-stack developer with a passion for building modern web
-              applications. With expertise in React, Next.js, and TypeScript, I
-              create performant and scalable solutions that users love.
+              I'm a passionate Computer Science student at <strong>Parul Institute of Technology</strong> in Vadodara, Gujarat, 
+              with a CGPA of 8.77/10. I specialize in full-stack development with expertise in <strong>MERN stack</strong>, 
+              <strong> Next.js</strong>, and <strong>microservices architecture</strong>.
             </p>
             <p className="leading-relaxed">
-              When I'm not coding, you'll find me exploring new technologies,
-              contributing to open-source projects, or sharing knowledge with
-              the developer community.
+              I've built production-ready applications including <strong>HireHeaven</strong> - an AI-powered job portal with 
+              microservices architecture, <strong>Chattriz</strong> - a real-time voice & video chat platform, and an 
+              <strong> AI-powered blogging platform</strong>. My projects leverage modern technologies like PostgreSQL, 
+              Redis, Docker, and Kubernetes for scalability.
+            </p>
+            <p className="leading-relaxed">
+              Certified in <strong>AWS Cloud Foundations</strong>, <strong>Computer Networks (NPTEL)</strong>, and 
+              <strong> AI Fundamentals (IBM)</strong>, I'm constantly exploring cutting-edge technologies and contributing 
+              to innovative solutions in web development and cloud computing.
             </p>
             <div className="flex flex-wrap gap-3">
-              {["React", "Next.js", "TypeScript", "Tailwind", "Node.js", "PostgreSQL"].map(
+              {["MERN Stack", "Next.js", "Microservices", "PostgreSQL", "Redis", "Docker", "AWS"].map(
                 (tech) => (
                   <span
                     key={tech}
@@ -110,6 +170,65 @@ export default function About() {
             ))}
           </motion.div>
         </div>
+
+        {/* Skills Marquee */}
+        <motion.div
+          initial="hidden"
+          whileInView="show"
+          viewport={scrollAnimationConfig.viewport}
+          variants={fadeIn("up", 0.2)}
+          className="mt-16"
+        >
+          <h3 className="mb-8 text-center text-2xl font-bold">Tech Stack</h3>
+          <SkillsMarquee skills={marqueeSkills} speed={40} />
+          <p className="mt-4 text-center text-sm text-muted-foreground">
+            Drag to pause • Hover to pause
+          </p>
+        </motion.div>
+
+        {/* Timeline */}
+        <motion.div
+          initial="hidden"
+          whileInView="show"
+          viewport={scrollAnimationConfig.viewport}
+          variants={fadeIn("up", 0.3)}
+          className="mt-20"
+        >
+          <h3 className="mb-12 text-center text-2xl font-bold">Education & Certifications</h3>
+          <div className="relative space-y-8">
+            {/* Vertical Line */}
+            <div className="absolute left-4 top-0 bottom-0 w-0.5 bg-gradient-to-b from-primary via-accent to-primary/20 hidden sm:block" />
+
+            {timeline.map((item, index) => (
+              <motion.div
+                key={index}
+                variants={fadeIn("right", index * 0.1)}
+                className="relative flex gap-6 sm:pl-12"
+              >
+                {/* Icon */}
+                <div className="absolute left-0 hidden sm:flex h-10 w-10 items-center justify-center rounded-full border-2 border-primary bg-background">
+                  <item.icon className="h-5 w-5 text-primary" />
+                </div>
+
+                {/* Content */}
+                <div className="flex-1 rounded-2xl border border-border bg-muted/30 p-6 backdrop-blur-sm">
+                  <div className="mb-2 flex flex-wrap items-center gap-2">
+                    <h4 className="font-semibold">{item.title}</h4>
+                    <span className="rounded-full bg-primary/10 px-3 py-1 text-xs font-medium text-primary">
+                      {item.period}
+                    </span>
+                  </div>
+                  <p className="mb-2 text-sm font-medium text-muted-foreground">
+                    {item.organization}
+                  </p>
+                  <p className="text-sm text-muted-foreground">
+                    {item.description}
+                  </p>
+                </div>
+              </motion.div>
+            ))}
+          </div>
+        </motion.div>
       </div>
 
       {/* Background Decoration */}

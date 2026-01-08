@@ -1,21 +1,18 @@
 import type { Metadata } from "next";
-import { Geist, Geist_Mono } from "next/font/google";
+import { Inter } from "next/font/google";
 import "./globals.css";
 import SmoothScrollProvider from "@/components/providers/SmoothScrollProvider";
+import { ThemeProvider } from "next-themes";
+import Navbar from "@/components/Navbar";
 
-const geistSans = Geist({
-  variable: "--font-geist-sans",
-  subsets: ["latin"],
-});
-
-const geistMono = Geist_Mono({
-  variable: "--font-geist-mono",
+const inter = Inter({
+  variable: "--font-inter",
   subsets: ["latin"],
 });
 
 export const metadata: Metadata = {
-  title: "Portfolio | Modern Developer",
-  description: "A modern portfolio showcasing projects, skills, and experience with beautiful animations and responsive design.",
+  title: "Abhay Kumar Singh - Developer Portfolio",
+  description: "Full-stack Developer | BTech CSE @ Parul University | MERN, Next.js, Microservices | AWS & AI Enthusiast",
 };
 
 export default function RootLayout({
@@ -24,13 +21,19 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <html lang="en" className="dark scroll-smooth">
-      <body
-        className={`${geistSans.variable} ${geistMono.variable} antialiased`}
-      >
-        <SmoothScrollProvider>
-          {children}
-        </SmoothScrollProvider>
+    <html lang="en" className="scroll-smooth" suppressHydrationWarning>
+      <body className={`${inter.variable} antialiased font-sans`}>
+        <ThemeProvider
+          attribute="class"
+          defaultTheme="dark"
+          enableSystem
+          disableTransitionOnChange
+        >
+          <SmoothScrollProvider>
+            <Navbar />
+            {children}
+          </SmoothScrollProvider>
+        </ThemeProvider>
       </body>
     </html>
   );

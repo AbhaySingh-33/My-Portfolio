@@ -1,20 +1,22 @@
 "use client";
 
 import { motion } from "framer-motion";
-import { Github, Linkedin, Mail, MapPin, Send } from "lucide-react";
+import { Github, Linkedin, Mail, MapPin, Send, CheckCircle, XCircle } from "lucide-react";
 import { fadeIn, scrollAnimationConfig } from "@/lib/animations";
+import { useState, FormEvent } from "react";
+import emailjs from "@emailjs/browser";
 
 const contactMethods = [
   {
     icon: Mail,
     label: "Email",
-    value: "your.email@example.com",
-    href: "mailto:your.email@example.com",
+    value: "abhaysingh957152@gmail.com",
+    href: "mailto:abhaysingh957152@gmail.com",
   },
   {
     icon: MapPin,
     label: "Location",
-    value: "Your City, Country",
+    value: "Vadodara, Gujarat, India",
     href: "#",
   },
 ];
@@ -23,21 +25,70 @@ const socialLinks = [
   {
     icon: Github,
     label: "GitHub",
-    href: "https://github.com",
+    href: "https://github.com/AbhaySingh-33",
   },
   {
     icon: Linkedin,
     label: "LinkedIn",
-    href: "https://linkedin.com",
+    href: "https://www.linkedin.com/in/abhay-singh-77b81833b",
   },
   {
     icon: Mail,
     label: "Email",
-    href: "mailto:your.email@example.com",
+    href: "mailto:abhaysingh957152@gmail.com",
   },
 ];
 
 export default function Contact() {
+  const [formData, setFormData] = useState({
+    name: "",
+    email: "",
+    message: "",
+  });
+  const [status, setStatus] = useState<"idle" | "loading" | "success" | "error">("idle");
+
+  const handleSubmit = async (e: FormEvent) => {
+    e.preventDefault();
+    setStatus("loading");
+
+    try {
+      // EmailJS credentials from environment variables
+      const SERVICE_ID = process.env.NEXT_PUBLIC_EMAILJS_SERVICE_ID!;
+      const TEMPLATE_ID = process.env.NEXT_PUBLIC_EMAILJS_TEMPLATE_ID!;
+      const PUBLIC_KEY = process.env.NEXT_PUBLIC_EMAILJS_PUBLIC_KEY!;
+
+      await emailjs.send(
+        SERVICE_ID,
+        TEMPLATE_ID,
+        {
+          from_name: formData.name,
+          from_email: formData.email,
+          message: formData.message,
+        },
+        PUBLIC_KEY
+      );
+
+      setStatus("success");
+      setFormData({ name: "", email: "", message: "" });
+      
+      // Reset success message after 5 seconds
+      setTimeout(() => setStatus("idle"), 5000);
+    } catch (error) {
+      console.error("EmailJS Error:", error);
+      setStatus("error");
+      
+      // Reset error message after 5 seconds
+      setTimeout(() => setStatus("idle"), 5000);
+    }
+  };
+
+  const handleChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
+    setFormData({
+      ...formData,
+      [e.target.name]: e.target.value,
+    });
+  };
+
   return (
     <section
       id="contact"
@@ -111,7 +162,7 @@ export default function Contact() {
                     href={social.href}
                     target="_blank"
                     rel="noopener noreferrer"
-                    whileHover={{ scale: 1.1, rotate: 5 }}
+                    whileHover={{ scale: 1.1, rotate: 5, y: -5 }}
                     whileTap={{ scale: 0.95 }}
                     className="flex h-12 w-12 items-center justify-center rounded-lg border border-border bg-muted/30 text-muted-foreground transition-all hover:border-primary hover:bg-primary hover:text-primary-foreground"
                     aria-label={social.label}
@@ -121,6 +172,23 @@ export default function Contact() {
                 ))}
               </div>
             </div>
+
+            {/* Map Embed */}
+            <motion.div
+              variants={fadeIn("right", 0.4)}
+              className="overflow-hidden rounded-2xl border border-border"
+            >
+              <iframe
+                src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d118143.42336790485!2d73.09955!3d22.30733!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x395fc8ab91a3ddab%3A0xac39d3bfe1473fb8!2sVadodara%2C%20Gujarat!5e0!3m2!1sen!2sin!4v1641234567890!5m2!1sen!2sin"
+                width="100%"
+                height="200"
+                style={{ border: 0 }}
+                allowFullScreen
+                loading="lazy"
+                referrerPolicy="no-referrer-when-downgrade"
+                className="grayscale"
+              />
+            </motion.div>
           </motion.div>
 
           {/* Contact Form */}
@@ -131,7 +199,7 @@ export default function Contact() {
             variants={fadeIn("left", 0.1)}
             className="rounded-2xl border border-border bg-muted/30 p-8"
           >
-            <form className="space-y-6">
+            <form onSubmit={handleSubmit} className="space-y-6">
               <div>
                 <label
                   htmlFor="name"
@@ -139,11 +207,15 @@ export default function Contact() {
                 >
                   Name
                 </label>
-                <input
+                <motion.input
                   type="text"
                   id="name"
                   name="name"
-                  className="w-full rounded-lg border border-border bg-background px-4 py-3 transition-all focus:border-primary focus:outline-none focus:ring-2 focus:ring-primary/20"
+                  value={formData.name}
+                  onChange={handleChange}
+                  required
+                  whileFocus={{ scale: 1.02 }}
+                  className="w-full rounded-lg border border-border bg-background px-4 py-3 transition-all focus:border-primary focus:outline-none focus:ring-2 focus:ring-primary/20 focus:shadow-lg focus:shadow-primary/10"
                   placeholder="Your Name"
                 />
               </div>
@@ -155,11 +227,15 @@ export default function Contact() {
                 >
                   Email
                 </label>
-                <input
+                <motion.input
                   type="email"
                   id="email"
                   name="email"
-                  className="w-full rounded-lg border border-border bg-background px-4 py-3 transition-all focus:border-primary focus:outline-none focus:ring-2 focus:ring-primary/20"
+                  value={formData.email}
+                  onChange={handleChange}
+                  required
+                  whileFocus={{ scale: 1.02 }}
+                  className="w-full rounded-lg border border-border bg-background px-4 py-3 transition-all focus:border-primary focus:outline-none focus:ring-2 focus:ring-primary/20 focus:shadow-lg focus:shadow-primary/10"
                   placeholder="your.email@example.com"
                 />
               </div>
@@ -171,24 +247,60 @@ export default function Contact() {
                 >
                   Message
                 </label>
-                <textarea
+                <motion.textarea
                   id="message"
                   name="message"
+                  value={formData.message}
+                  onChange={handleChange}
+                  required
                   rows={5}
-                  className="w-full rounded-lg border border-border bg-background px-4 py-3 transition-all focus:border-primary focus:outline-none focus:ring-2 focus:ring-primary/20"
+                  whileFocus={{ scale: 1.02 }}
+                  className="w-full rounded-lg border border-border bg-background px-4 py-3 transition-all focus:border-primary focus:outline-none focus:ring-2 focus:ring-primary/20 focus:shadow-lg focus:shadow-primary/10"
                   placeholder="Your message..."
                 />
               </div>
 
               <motion.button
                 type="submit"
-                whileHover={{ scale: 1.02 }}
+                disabled={status === "loading"}
+                whileHover={{ scale: status === "loading" ? 1 : 1.02 }}
                 whileTap={{ scale: 0.98 }}
-                className="flex w-full items-center justify-center gap-2 rounded-lg bg-primary px-8 py-3 font-medium text-primary-foreground transition-all hover:bg-accent hover:shadow-lg hover:shadow-accent/50"
+                className={`flex w-full items-center justify-center gap-2 rounded-lg px-8 py-3 font-medium transition-all ${
+                  status === "loading"
+                    ? "bg-muted text-muted-foreground cursor-not-allowed"
+                    : status === "success"
+                    ? "bg-green-600 text-white"
+                    : status === "error"
+                    ? "bg-red-600 text-white"
+                    : "bg-primary text-primary-foreground hover:bg-accent hover:shadow-lg hover:shadow-accent/50"
+                }`}
               >
-                Send Message
-                <Send className="h-4 w-4" />
+                {status === "loading" && "Sending..."}
+                {status === "success" && (
+                  <>
+                    <CheckCircle className="h-4 w-4" />
+                    Message Sent!
+                  </>
+                )}
+                {status === "error" && (
+                  <>
+                    <XCircle className="h-4 w-4" />
+                    Failed to Send
+                  </>
+                )}
+                {status === "idle" && (
+                  <>
+                    Send Message
+                    <Send className="h-4 w-4" />
+                  </>
+                )}
               </motion.button>
+
+              {status === "error" && (
+                <p className="text-sm text-red-600 dark:text-red-400">
+                  Please configure EmailJS credentials in the Contact component.
+                </p>
+              )}
             </form>
           </motion.div>
         </div>
@@ -205,7 +317,7 @@ export default function Contact() {
         variants={fadeIn("up", 0.3)}
         className="mt-20 border-t border-border pt-8 text-center text-sm text-muted-foreground"
       >
-        <p>© 2026 Your Name. Built with Next.js & Tailwind CSS.</p>
+        <p>© 2026 Abhay Kumar Singh. Built with Next.js, Framer Motion & Tailwind CSS.</p>
       </motion.div>
     </section>
   );
