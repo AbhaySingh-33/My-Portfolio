@@ -4,6 +4,7 @@ import { motion, useMotionValue, useSpring, useTransform } from "framer-motion";
 import { ExternalLink, Github } from "lucide-react";
 import { fadeIn, scrollAnimationConfig } from "@/lib/animations";
 import { useState } from "react";
+import Image from "next/image";
 
 const projects = [
   {
@@ -90,18 +91,15 @@ function ProjectCard({ project, index }: { project: typeof projects[0]; index: n
       whileHover={{ z: 50 }}
       className="group relative overflow-hidden rounded-2xl border border-border bg-background shadow-lg transition-all hover:border-primary/50 hover:shadow-2xl hover:shadow-primary/20"
     >
-      {/* Project Image Placeholder */}
+      {/* Project Image */}
       <div className="relative h-48 overflow-hidden bg-linear-to-br from-primary/20 to-accent/20">
-        <div className="absolute inset-0 flex items-center justify-center">
-          <div className="text-center">
-            <div className="mb-2 text-5xl font-bold text-primary/30">
-              {project.title.charAt(0)}
-            </div>
-            <p className="text-sm text-muted-foreground">
-              {project.period}
-            </p>
-          </div>
-        </div>
+        <Image
+          src={project.image}
+          alt={project.title}
+          fill
+          className="object-cover transition-transform duration-300 group-hover:scale-110"
+          sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
+        />
         {/* Hover Overlay */}
         <div className="absolute inset-0 bg-linear-to-t from-background via-background/50 to-transparent opacity-0 transition-opacity group-hover:opacity-100" />
       </div>
