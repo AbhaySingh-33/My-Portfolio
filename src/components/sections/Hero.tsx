@@ -4,14 +4,20 @@ import { motion } from "framer-motion";
 import { ArrowDown, Github, Linkedin, Mail, Award, Code2, Sparkles } from "lucide-react";
 import { fadeIn, staggerContainer, textVariant } from "@/lib/animations";
 import TypewriterText from "@/components/ui/TypewriterText";
+import InteractiveBackground from "@/components/ui/InteractiveBackground";
 import Image from "next/image";
 
 export default function Hero() {
   return (
     <section
       id="hero"
-      className="relative flex min-h-screen items-center justify-center overflow-hidden bg-linear-to-b from-background to-muted/20 px-4 pt-16 sm:px-6 lg:px-8"
+      className="relative flex min-h-screen items-center justify-center overflow-hidden bg-background px-4 pt-16 sm:px-6 lg:px-8"
     >
+      {/* Interactive Background */}
+      <div className="absolute inset-0 z-0">
+        <InteractiveBackground />
+      </div>
+
       <motion.div
         variants={staggerContainer(0.2, 0.1)}
         initial="hidden"
@@ -21,33 +27,38 @@ export default function Hero() {
         {/* Left: Text Content */}
         <div className="flex flex-col justify-center space-y-8">
           {/* Greeting */}
-          <motion.p
+          <motion.div
             variants={fadeIn("down", 0)}
-            className="text-lg font-medium text-accent sm:text-xl"
+            className="flex items-center gap-2 text-lg font-medium text-accent sm:text-xl"
           >
-            Hi, I'm
-          </motion.p>
+            <Sparkles className="h-5 w-5 animate-pulse" />
+            <span>Hi, I'm</span>
+          </motion.div>
 
           {/* Name with Typewriter Effect */}
           <motion.h1
             variants={textVariant(0.1)}
             className="text-5xl font-bold leading-tight tracking-tight sm:text-6xl lg:text-7xl"
           >
-            <TypewriterText
-              text="Abhay Kumar Singh"
-              delay={300}
-              speed={100}
-              className="text-gradient"
-            />
+             <span className="text-gradient">Abhay Kumar Singh</span>
           </motion.h1>
 
           {/* Tagline */}
-          <motion.h2
+          <motion.div
             variants={textVariant(0.2)}
-            className="text-2xl font-semibold text-muted-foreground sm:text-3xl lg:text-4xl"
+            className="h-10 text-2xl font-semibold text-muted-foreground sm:text-3xl lg:text-4xl"
           >
-            Full-stack Developer | Vadodara, Gujarat
-          </motion.h2>
+            <TypewriterText
+              text={[
+                "Full-stack Developer",
+                "MERN Stack Specialist", 
+                "Problem Solver",
+                "Tech Enthusiast"
+              ]}
+              speed={50}
+              className="text-foreground"
+            />
+          </motion.div>
 
           <motion.p
             variants={fadeIn("up", 0.3)}
@@ -135,7 +146,7 @@ export default function Hero() {
                 repeat: Infinity,
                 ease: "easeInOut",
               }}
-              className="relative h-64 w-64 rounded-full bg-gradient-to-br from-primary/30 via-accent/30 to-primary/30 p-2"
+              className="relative h-64 w-64 rounded-full bg-linear-to-br from-primary/30 via-accent/30 to-primary/30 p-2"
             >
               <div className="relative h-full w-full overflow-hidden rounded-full bg-background">
                 <Image
@@ -162,7 +173,7 @@ export default function Hero() {
           >
             <motion.div
               variants={fadeIn("up", 0)}
-              className="rounded-2xl border border-border bg-muted/30 p-4 text-center backdrop-blur-sm"
+              className="rounded-2xl border border-border bg-muted/30 p-4 text-center backdrop-blur-sm transition-transform hover:scale-105"
             >
               <Code2 className="mx-auto mb-2 h-8 w-8 text-primary" />
               <p className="text-2xl font-bold text-foreground">3</p>
@@ -170,7 +181,7 @@ export default function Hero() {
             </motion.div>
             <motion.div
               variants={fadeIn("up", 0.1)}
-              className="rounded-2xl border border-border bg-muted/30 p-4 text-center backdrop-blur-sm"
+              className="rounded-2xl border border-border bg-muted/30 p-4 text-center backdrop-blur-sm transition-transform hover:scale-105"
             >
               <Github className="mx-auto mb-2 h-8 w-8 text-primary" />
               <p className="text-2xl font-bold text-foreground">15+</p>
@@ -178,7 +189,7 @@ export default function Hero() {
             </motion.div>
             <motion.div
               variants={fadeIn("up", 0.2)}
-              className="rounded-2xl border border-border bg-muted/30 p-4 text-center backdrop-blur-sm"
+              className="rounded-2xl border border-border bg-muted/30 p-4 text-center backdrop-blur-sm transition-transform hover:scale-105"
             >
               <Award className="mx-auto mb-2 h-8 w-8 text-primary" />
               <p className="text-2xl font-bold text-foreground">3</p>
@@ -198,13 +209,13 @@ export default function Hero() {
           repeat: Infinity,
           repeatType: "reverse",
         }}
-        className="absolute bottom-8 left-1/2 -translate-x-1/2"
+        className="absolute bottom-8 left-1/2 -translate-x-1/2 z-20"
       >
         <ArrowDown className="h-6 w-6 text-muted-foreground" />
       </motion.div>
 
-      {/* Parallax Background Decoration */}
-      <div className="absolute inset-0 -z-10 overflow-hidden">
+      {/* Static Background Decoration - Reduced intensity */}
+      <div className="absolute inset-0 -z-10 overflow-hidden opacity-30">
         <div className="absolute left-1/2 top-0 h-96 w-96 -translate-x-1/2 rounded-full bg-primary/10 blur-3xl" />
         <div className="absolute bottom-0 right-0 h-96 w-96 rounded-full bg-accent/10 blur-3xl" />
       </div>

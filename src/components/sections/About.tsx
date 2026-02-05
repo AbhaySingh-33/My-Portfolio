@@ -1,6 +1,7 @@
 "use client";
 
-import { motion } from "framer-motion";
+import { motion, useScroll } from "framer-motion";
+import { useRef } from "react";
 import { Code2, Palette, Rocket, Zap, GraduationCap, Briefcase, Award } from "lucide-react";
 import { fadeIn, scrollAnimationConfig } from "@/lib/animations";
 import SkillsMarquee from "@/components/ui/SkillsMarquee";
@@ -81,6 +82,68 @@ const timeline = [
     description: "AI concepts including NLP, Computer Vision, ML, and Deep Learning",
   },
 ];
+
+// Separate component for scroll logic
+function TimelineContainer({ items }: { items: typeof timeline }) {
+  const containerRef = useRef<HTMLDivElement>(null);
+  const { scrollYProgress } = useScroll({
+    target: containerRef,
+    offset: ["start end", "end end"],
+  });
+
+  return (
+    <div ref={containerRef} className="relative space-y-8">
+      {/* Vertical Line Background (Static) */}
+      <div className="absolute left-4 top-0 bottom-0 hidden w-0.5 bg-muted sm:block" />
+      
+      {/* Vertical Line (Animated) */}
+      <motion.div 
+        style={{ scaleY: scrollYProgress }}
+        className="absolute left-4 top-0 bottom-0 hidden w-0.5 origin-top bg-linear-to-b from-primary via-accent to-primary/20 sm:block" 
+      />
+
+      {items.map((item, index) => (
+        <TimelineItem key={index} item={item} index={index} />
+      ))}
+    </div>
+  );
+}
+
+function TimelineItem({ item, index }: { item: typeof timeline[0], index: number }) {
+  return (
+    <motion.div
+      initial={{ opacity: 0, x: -20 }}
+      whileInView={{ opacity: 1, x: 0 }}
+      viewport={{ once: true, margin: "-100px" }}
+      transition={{ duration: 0.5, delay: index * 0.1 }}
+      className="relative flex gap-6 sm:pl-12"
+    >
+      {/* Icon */}
+      <div className="absolute left-0 hidden sm:flex h-10 w-10 items-center justify-center rounded-full border-2 border-primary bg-background shadow-[0_0_10px_rgba(var(--primary),0.3)] z-10">
+        <item.icon className="h-5 w-5 text-primary" />
+      </div>
+
+      {/* Content */}
+      <motion.div 
+        whileHover={{ scale: 1.02 }}
+        className="flex-1 rounded-2xl border border-border bg-muted/30 p-6 backdrop-blur-sm transition-colors hover:bg-muted/50"
+      >
+        <div className="mb-2 flex flex-wrap items-center gap-2">
+          <h4 className="font-semibold">{item.title}</h4>
+          <span className="rounded-full bg-primary/10 px-3 py-1 text-xs font-medium text-primary">
+            {item.period}
+          </span>
+        </div>
+        <p className="mb-2 text-sm font-medium text-muted-foreground">
+          {item.organization}
+        </p>
+        <p className="text-sm text-muted-foreground">
+          {item.description}
+        </p>
+      </motion.div>
+    </motion.div>
+  );
+}
 
 export default function About() {
   return (
@@ -195,41 +258,10 @@ export default function About() {
           className="mt-20"
         >
           <h3 className="mb-12 text-center text-2xl font-bold">Education & Certifications</h3>
-          <div className="relative space-y-8">
-            {/* Vertical Line */}
-            <div className="absolute left-4 top-0 bottom-0 w-0.5 bg-gradient-to-b from-primary via-accent to-primary/20 hidden sm:block" />
-
-            {timeline.map((item, index) => (
-              <motion.div
-                key={index}
-                variants={fadeIn("right", index * 0.1)}
-                className="relative flex gap-6 sm:pl-12"
-              >
-                {/* Icon */}
-                <div className="absolute left-0 hidden sm:flex h-10 w-10 items-center justify-center rounded-full border-2 border-primary bg-background">
-                  <item.icon className="h-5 w-5 text-primary" />
-                </div>
-
-                {/* Content */}
-                <div className="flex-1 rounded-2xl border border-border bg-muted/30 p-6 backdrop-blur-sm">
-                  <div className="mb-2 flex flex-wrap items-center gap-2">
-                    <h4 className="font-semibold">{item.title}</h4>
-                    <span className="rounded-full bg-primary/10 px-3 py-1 text-xs font-medium text-primary">
-                      {item.period}
-                    </span>
-                  </div>
-                  <p className="mb-2 text-sm font-medium text-muted-foreground">
-                    {item.organization}
-                  </p>
-                  <p className="text-sm text-muted-foreground">
-                    {item.description}
-                  </p>
-                </div>
-              </motion.div>
-            ))}
-          </div>
+          <TimelineContainer items={timeline} />
         </motion.div>
       </div>
+
 
       {/* Background Decoration */}
       <div className="absolute left-0 top-1/2 h-96 w-96 -translate-y-1/2 rounded-full bg-accent/5 blur-3xl" />
