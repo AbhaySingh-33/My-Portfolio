@@ -45,10 +45,19 @@ export default function Contact() {
     email: "",
     message: "",
   });
-  const [status, setStatus] = useState<"idle" | "loading" | "success" | "error">("idle");
+  const [status, setStatus] = useState<"idle" | "loading" | "success" | "error" | "invalid_email">("idle");
 
   const handleSubmit = async (e: FormEvent) => {
     e.preventDefault();
+
+    // Strict email validation regex to ensure it has a proper domain (e.g. .com)
+    const emailRegex = /^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/;
+    if (!emailRegex.test(formData.email)) {
+      setStatus("invalid_email");
+      setTimeout(() => setStatus("idle"), 3000);
+      return;
+    }
+
     setStatus("loading");
 
     try {
@@ -270,7 +279,7 @@ export default function Contact() {
                     ? "bg-muted text-muted-foreground cursor-not-allowed"
                     : status === "success"
                     ? "bg-green-600 text-white"
-                    : status === "error"
+                    : status === "error" || status === "invalid_email"
                     ? "bg-red-600 text-white"
                     : "bg-primary text-primary-foreground hover:bg-accent hover:shadow-lg hover:shadow-accent/50"
                 }`}
@@ -282,10 +291,10 @@ export default function Contact() {
                     Message Sent!
                   </>
                 )}
-                {status === "error" && (
+                {(status === "error" || status === "invalid_email") && (
                   <>
                     <XCircle className="h-4 w-4" />
-                    Failed to Send
+                    {status === "invalid_email" ? "Invalid Email" : "Failed to Send"}
                   </>
                 )}
                 {status === "idle" && (
@@ -299,6 +308,11 @@ export default function Contact() {
               {status === "error" && (
                 <p className="text-sm text-red-600 dark:text-red-400">
                   Please configure EmailJS credentials in the Contact component.
+                </p>
+              )}
+              {status === "invalid_email" && (
+                <p className="text-sm text-red-600 dark:text-red-400">
+                  Please enter a full, valid email address (e.g., name@gmail.com).
                 </p>
               )}
             </form>
