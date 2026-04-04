@@ -50,10 +50,10 @@ export default function Hero() {
           >
             <TypewriterText
               text={[
-                "Full-stack Developer",
+                "Generative AI Engineer",
+                "Full-Stack Developer",
                 "MERN Stack Specialist", 
-                "Problem Solver",
-                "Tech Enthusiast"
+                "Problem Solver"
               ]}
               speed={50}
               className="text-foreground"
@@ -64,8 +64,8 @@ export default function Hero() {
             variants={fadeIn("up", 0.3)}
             className="max-w-2xl text-base leading-relaxed text-muted-foreground sm:text-lg"
           >
-            BTech CSE Student specializing in full-stack development with MERN, Next.js, and microservices.
-            Building scalable applications with real-time features and AI integration.
+            BTech CSE Student specializing in Generative AI, Multi-Agent Systems, and Full-Stack Development.
+            Building scalable microservices, advanced RAG architectures, and highly responsive web applications.
           </motion.p>
 
           {/* CTA Buttons */}
@@ -176,7 +176,7 @@ export default function Hero() {
               className="rounded-2xl border border-border bg-muted/30 p-4 text-center backdrop-blur-sm transition-transform hover:scale-105"
             >
               <Code2 className="mx-auto mb-2 h-8 w-8 text-primary" />
-              <p className="text-2xl font-bold text-foreground">3</p>
+              <p className="text-2xl font-bold text-foreground">6+</p>
               <p className="text-sm text-muted-foreground">Projects</p>
             </motion.div>
             <motion.div

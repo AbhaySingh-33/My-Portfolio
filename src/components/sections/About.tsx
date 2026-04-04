@@ -15,17 +15,17 @@ const skills = [
   {
     icon: Zap,
     title: "Backend & APIs",
-    description: "Node.js, Express.js, REST APIs, Socket.io, Apache Kafka",
+    description: "Node.js, Express.js, FastAPI, REST APIs",
   },
   {
     icon: Palette,
-    title: "Database & Caching",
-    description: "MongoDB, PostgreSQL, MySQL, Redis, Appwrite",
+    title: "Databases & Vector Stores",
+    description: "PostgreSQL, MongoDB, Neo4j, Pinecone, Redis",
   },
   {
     icon: Rocket,
-    title: "Cloud & DevOps",
-    description: "AWS Foundations, Docker, Kubernetes, Git, Linux",
+    title: "DevOps & AI Systems",
+    description: "Docker, Kubernetes, AWS, LangGraph, DSPy",
   },
 ];
 
@@ -35,6 +35,12 @@ const marqueeSkills = [
   "TypeScript",
   "Node.js",
   "Express.js",
+  "FastAPI",
+  "Python",
+  "LangChain",
+  "Neo4j",
+  "Pinecone",
+  "Qdrant",
   "Socket.io",
   "PostgreSQL",
   "MongoDB",
@@ -179,22 +185,20 @@ export default function About() {
             <h3 className="text-2xl font-bold">My Journey</h3>
             <p className="leading-relaxed">
               I'm a passionate Computer Science student at <strong>Parul Institute of Technology</strong> in Vadodara, Gujarat, 
-              with a CGPA of 8.77/10. I specialize in full-stack development with expertise in <strong>MERN stack</strong>, 
-              <strong> Next.js</strong>, and <strong>microservices architecture</strong>.
+              with a CGPA of 8.77/10. I specialize in full-stack development and have deep expertise in <strong>Generative AI</strong>, 
+              <strong> Agentic workflows</strong>, and <strong>microservices architecture</strong>.
             </p>
             <p className="leading-relaxed">
-              I've built production-ready applications including <strong>HireHeaven</strong> - an AI-powered job portal with 
-              microservices architecture, <strong>Chattriz</strong> - a real-time voice & video chat platform, and an 
-              <strong> AI-powered blogging platform</strong>. My projects leverage modern technologies like PostgreSQL, 
-              Redis, Docker, and Kubernetes for scalability.
+              I've built production-ready applications spanning multi-agent AI systems like <strong>OmniAI</strong>, advanced 
+              search engines using <strong>Knowledge Graph RAG</strong>, and scalable full-stack platforms such as <strong>HireHeaven</strong> and 
+              <strong> Chattrix</strong>. My stack leverages modern technologies from FastAPI and Neo4j for intelligent backends, to React and Next.js for robust user interfaces. 
             </p>
             <p className="leading-relaxed">
               Certified in <strong>AWS Cloud Foundations</strong>, <strong>Computer Networks (NPTEL)</strong>, and 
-              <strong> AI Fundamentals (IBM)</strong>, I'm constantly exploring cutting-edge technologies and contributing 
-              to innovative solutions in web development and cloud computing.
+              <strong> AI Fundamentals (IBM)</strong>, I'm constantly exploring cutting-edge technologies to design system-level AI orchestrations and bridging backend intelligence with responsive frontend experiences.
             </p>
             <div className="flex flex-wrap gap-3">
-              {["MERN Stack", "Next.js", "Microservices", "PostgreSQL", "Redis", "Docker", "AWS"].map(
+              {["Generative AI", "LangChain", "Python", "MERN Stack", "Next.js", "Microservices", "Neo4j", "Docker"].map(
                 (tech) => (
                   <span
                     key={tech}

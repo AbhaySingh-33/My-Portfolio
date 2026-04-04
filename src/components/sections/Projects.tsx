@@ -18,7 +18,7 @@ const projects = [
     period: "Oct 2024 – Dec 2025",
   },
   {
-    title: "Chattriz - Real-time Voice & Video Chat",
+    title: "Chattrix - Real-time Voice & Video Chat",
     description:
       "Real-time communication platform with WebRTC for peer-to-peer streaming, Simple-Peer for low-latency connections. Includes persistent chat storage with Redis Pub/Sub, comprehensive error handling, and multi-server scalability using Docker containers.",
     image: "/project-2.jpg",
@@ -36,6 +36,35 @@ const projects = [
     github: "https://github.com/AbhaySingh-33/Blog-Application",
     demo: "#",
     period: "Dec 2024 – March 2025",
+  },
+  {
+    title: "CiviSense — Civic Issue Monitoring System",
+    description:
+      "A geo-fenced, offline-first digital platform that enables field staff to proactively report, track, and resolve civic issues. Features automatic ward detection via PostGIS, AI-assisted categorization using TensorFlow.js, and background sync via Service Workers.",
+    image: "/project-4.png",
+    tech: ["Next.js", "Express.js", "PostgreSQL", "PostGIS", "Redis", "TensorFlow.js", "PWA"],
+    github: "https://github.com/AbhaySingh-33/Civic-issue",
+    demo: "#",
+    period: "2026",
+  },
+  {
+    title: "OmniAI - Multi-Agent Platform",
+    description:
+      "A full stack multi-agent AI platform featuring LangGraph orchestration, RAG, knowledge graph integration, MCP tool execution, and an emotion analytics module. Includes modular agents for reasoning, research, tools, and memory.",
+    image: "/project-5.png",
+    tech: ["FastAPI", "React (Next.js)", "LangGraph", "Pinecone", "Neo4j", "PostgreSQL", "Mistral"],
+    github: "https://github.com/AbhaySingh-33/Omni-AI",
+    demo: "#",
+    period: "2026",
+  },
+  {
+    title: "Advanced RAG & Knowledge Graph Engine",
+    description: "Designed an Advanced RAG pipeline incorporating multi-query routing and Reciprocal Rank Fusion (RRF). Developed a KG-RAG application leveraging Qdrant for vector embeddings and Neo4j for topological data extraction, powered by Mistral LLM.",
+    image: "/project-6.png",
+    tech: ["Python", "Qdrant", "Neo4j", "Mistral LLM", "LangChain", "RRF", "Docker", "Streamlit"],
+    github: "https://github.com/AbhaySingh-33/Gen-AI",
+    demo: "#",
+    period: "2026",
   },
 ];
 
