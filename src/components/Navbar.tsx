@@ -92,6 +92,19 @@ export default function Navbar() {
 
             {/* Dark Mode Toggle & Mobile Menu */}
             <div className="flex items-center gap-4">
+              {/* Resume Download Button */}
+              <motion.a
+                href="/Resume-CX.pdf"
+                download="Abhay_Singh_Resume.pdf"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="hidden md:flex items-center justify-center rounded-lg bg-primary/10 px-4 py-2 text-sm font-medium text-primary transition-colors hover:bg-primary/20"
+                whileHover={{ scale: 1.05 }}
+                whileTap={{ scale: 0.95 }}
+              >
+                Resume
+              </motion.a>
+
               {/* Dark Mode Toggle */}
               {mounted && (
                 <motion.button
@@ -154,6 +167,18 @@ export default function Navbar() {
                 {item.name}
               </motion.a>
             ))}
+            <motion.a
+              href="/Resume-CX.pdf"
+              download="Abhay_Singh_Resume.pdf"
+              target="_blank"
+              rel="noopener noreferrer"
+              initial={{ x: -20, opacity: 0 }}
+              animate={{ x: isOpen ? 0 : -20, opacity: isOpen ? 1 : 0 }}
+              transition={{ delay: navItems.length * 0.1 }}
+              className="block px-4 py-3 rounded-lg text-base font-medium text-primary hover:bg-primary/10 transition-colors cursor-pointer"
+            >
+              Resume
+            </motion.a>
           </div>
         </motion.div>
       </motion.nav>

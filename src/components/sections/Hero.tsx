@@ -71,7 +71,7 @@ export default function Hero() {
           {/* CTA Buttons */}
           <motion.div
             variants={fadeIn("up", 0.4)}
-            className="flex flex-col items-start gap-4 sm:flex-row"
+            className="flex flex-col items-start gap-4 sm:flex-row sm:flex-wrap"
           >
             <a
               href="#projects"
@@ -85,6 +85,16 @@ export default function Hero() {
                 whileHover={{ x: 0 }}
                 transition={{ duration: 0.3 }}
               />
+            </a>
+            <a
+              href="/Resume-CX.pdf"
+              download="Abhay_Singh_Resume.pdf"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="flex items-center gap-2 rounded-full border-2 border-primary bg-primary/10 px-8 py-3 font-medium text-primary transition-all hover:scale-105 hover:border-accent hover:bg-accent/20 hover:text-accent hover:shadow-lg hover:shadow-accent/30"
+            >
+              <span className="relative z-10">Download Resume</span>
+              <ArrowDown className="relative z-10 h-4 w-4 transition-transform group-hover:translate-y-1" />
             </a>
             <a
               href="#contact"
