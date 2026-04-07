@@ -24,7 +24,7 @@ const projects = [
     image: "/project-2.jpg",
     tech: ["React", "Node.js", "Socket.io", "WebRTC", "Simple-Peer", "Redis"],
     github: "https://github.com/AbhaySingh-33/chatApplication",
-    demo: "#",
+    demo: "https://chat-application-bice-ten.vercel.app",
     period: "May 2025 – Aug 2025",
   },
   {
@@ -34,7 +34,7 @@ const projects = [
     image: "/project-3.jpg",
     tech: ["React (Vite)", "Appwrite", "OpenAI API", "GitHub OAuth", "Tailwind CSS"],
     github: "https://github.com/AbhaySingh-33/Blog-Application",
-    demo: "#",
+    demo: "https://blog-application-nvys.vercel.app",
     period: "Dec 2024 – March 2025",
   },
   {
