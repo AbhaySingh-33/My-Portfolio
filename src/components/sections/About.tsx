@@ -61,7 +61,7 @@ const timeline = [
     title: "BTech - Computer Science & Engineering",
     organization: "Parul Institute of Technology, Parul University",
     period: "Aug 2023 - May 2027",
-    description: "CGPA: 8.77/10 | Vadodara, Gujarat",
+    description: "CGPA: 8.70/10 | Vadodara, Gujarat",
   },
   {
     type: "cert",
@@ -185,7 +185,7 @@ export default function About() {
             <h3 className="text-2xl font-bold">My Journey</h3>
             <p className="leading-relaxed">
               I'm a passionate Computer Science student at <strong>Parul Institute of Technology</strong> in Vadodara, Gujarat, 
-              with a CGPA of 8.77/10. I specialize in full-stack development and have deep expertise in <strong>Generative AI</strong>, 
+              with a CGPA of 8.70/10. I specialize in full-stack development and have deep expertise in <strong>Generative AI</strong>, 
               <strong> Agentic workflows</strong>, and <strong>microservices architecture</strong>.
             </p>
             <p className="leading-relaxed">
